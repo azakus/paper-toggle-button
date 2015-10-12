@@ -8,8 +8,10 @@ before_script:
   - export CHROME_REV=$(curl -s ${CHROME_URL}/LAST_CHANGE)
   - curl ${CHROME_URL}/${CHROME_REV}/chrome-linux.zip --create-dirs -o out/chrome-linux.zip
   - unzip out/chrome-linux.zip -d out
-  - ln -s out/chrome-linux/chrome out/chrome-linux/google-chrome
-  - export PATH=out/chrome-linux/:$PATH
+  - pushd out/chrome-linux
+  - ln -s chrome google-chrome
+  - export PATH=$PWD:$PATH
+  - popd
   - npm install --quiet web-component-tester bower
   - export PATH=$PWD/node_modules/.bin:$PATH
   - bower install
