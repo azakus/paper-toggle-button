@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "4"
+before_script:
+  - "npm install --quiet web-component-tester bower"
+  - "export PATH=$PWD/node_modules/.bin:$PATH"
+  - "xvfb-run -a"
+  - "sleep 3"
+script: "wct -l firefox"
+sudo: false
