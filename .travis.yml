@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - "4"
+addons:
+  firefox: "latest"
 before_script:
   - "npm install --quiet web-component-tester bower"
   - "export PATH=$PWD/node_modules/.bin:$PATH"
