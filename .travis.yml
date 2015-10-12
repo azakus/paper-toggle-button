@@ -4,17 +4,16 @@ node_js:
 addons:
   firefox: "latest"
 before_script:
-  - |
-    mkdir .chrome
-    pushd .chrome
-    ln -s `which chromium-browser` google-chrome
-    export PATH=$PWD:$PATH
-    popd
-    which google-chrome
-    npm install --quiet web-component-tester bower
-    export PATH=$PWD/node_modules/.bin:$PATH
-    bower install
-    export DISPLAY=:99.0
-    sh -e /etc/init.d/xvfb start
+  - export CHROME_URL=https://storage.googleapis.com/chromium-browser-snapshots/Linux_x64
+  - export CHROME_REV=$(curl -s ${CHROME_URL}/LAST_CHANGE)
+  - curl ${CHROME_URL}/${CHROME_REV}/chrome-linux.zip --create-dirs -o out/chrome-linux.zip
+  - unzip out/chrome-linux.zip -d out
+  - ln -s out/linux-chrome/chrome out/linux-chrome/google-chrome
+  - export PATH=out/linux-chrome/:$PATH
+  - npm install --quiet web-component-tester bower
+  - export PATH=$PWD/node_modules/.bin:$PATH
+  - bower install
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
 script: "wct -l firefox -l chrome"
 sudo: false
