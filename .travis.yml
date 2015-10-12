@@ -4,7 +4,8 @@ node_js:
 before_script:
   - "npm install --quiet web-component-tester bower"
   - "export PATH=$PWD/node_modules/.bin:$PATH"
-  - "xvfb-run -a"
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
   - "sleep 3"
 script: "wct -l firefox"
 sudo: false
