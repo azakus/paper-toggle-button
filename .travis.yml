@@ -15,9 +15,7 @@ before_script:
   - npm install --quiet web-component-tester bower
   - export PATH=$PWD/node_modules/.bin:$PATH
   - bower install
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
 
-script: wct --simpleOutput -l firefox -l chrome
+script: xvfb-run -a wct --simpleOutput -l firefox -l chrome
 
 sudo: false
