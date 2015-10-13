@@ -12,7 +12,7 @@ addons:
       - google-chrome-stable
 
 before_script:
-  - npm install --quiet web-component-tester bower
+  - npm install web-component-tester bower
   - export PATH=$PWD/node_modules/.bin:$PATH
   - bower install
 
